@@ -1,11 +1,571 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>✨ Galeria Infantil - 50 Atividades ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f9e5b7 0%, #ffe0a5 100%);
+            font-family: 'Comic Sans MS', 'Chalkboard SE', '幼圆', 'Segoe UI', cursive, sans-serif;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+
+        /* título divertido */
+        .cabecalho-galeria {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .cabecalho-galeria h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #2d4059;
+            text-shadow: 5px 5px 0 #fbd46d, 8px 8px 0 rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+            word-break: break-word;
+            background: rgba(255, 255, 255, 0.4);
+            display: inline-block;
+            padding: 0.3rem 2rem 0.8rem 2rem;
+            border-radius: 100px 30px 100px 30px;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 15px 0 #b0885c;
+            border: 3px solid #f2bb77;
+        }
+
+        .subtitulo {
+            font-size: 1.8rem;
+            color: #3b2e1e;
+            background: #ffeecc;
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            margin-top: 1rem;
+            border-radius: 40px;
+            border: 3px dotted #ffa45c;
+            box-shadow: 0 6px 0 #af6b2e;
+        }
+
+        .subtitulo span {
+            background: #f08a5d;
+            color: white;
+            border-radius: 50%;
+            padding: 0.2rem 0.9rem;
+            margin: 0 0.5rem;
+            font-size: 2.2rem;
+            display: inline-block;
+        }
+
+        /* grade 5x10 = 50 itens */
+        .galeria-grade {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);  /* 5 colunas */
+            gap: 1.2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1rem;
+            background: #fce9cd;
+            border-radius: 70px 70px 30px 30px;
+            border: 8px solid #eba668;
+            box-shadow: inset 0 0 0 5px #ffeeca, 0 20px 0 #8f6b41;
+        }
+
+        /* cartões das atividades */
+        .cartao-atividade {
+            background: #fff8eb;
+            border-radius: 40px 40px 25px 25px;
+            padding: 1rem 0.5rem 1rem 0.5rem;
+            box-shadow: 0 12px 0 #b0a28a, 0 0 0 3px #f7d59a inset;
+            transition: all 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #f9c49a;
+            cursor: pointer;
+        }
+
+        .cartao-atividade:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 0 #9c8b70, 0 0 0 5px #ffe39c inset;
+            background: #fffae9;
+        }
+
+        /* container da imagem para manter proporção */
+        .moldura-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;  /* quadradinho perfeito */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffe1b9;
+            border-radius: 35px;
+            border: 4px solid white;
+            outline: 3px solid #fcb375;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        /* todas as imagens via placeholder colorido e divertido */
+        .cartao-atividade img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;  /* ícone inteiro visível */
+            display: block;
+            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.2));
+            transition: transform 0.2s;
+        }
+
+        .cartao-atividade:hover img {
+            transform: scale(1.08);
+        }
+
+        /* etiqueta com nome da atividade */
+        .legenda {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #3f2e19;
+            background: #ffe2b0;
+            width: 100%;
+            text-align: center;
+            padding: 0.4rem 0;
+            border-radius: 50px;
+            border: 2px solid #ffb469;
+            margin-top: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: inset 0 2px 4px #fabc74;
+        }
+
+        /* 50 atividades numeradas */
+        .numero-bolinha {
+            background: #ff8a5c;
+            color: white;
+            border-radius: 30px;
+            padding: 0.1rem 0.6rem;
+            font-size: 0.8rem;
+            margin-left: 0.3rem;
+            border: 1px solid white;
+        }
+
+        /* rodapé fofo */
+        .rodape-brincante {
+            text-align: center;
+            margin-top: 3.5rem;
+            font-size: 2rem;
+            color: #5d3e22;
+            background: #fbd5a2;
+            padding: 0.8rem;
+            border-radius: 60px 60px 20px 20px;
+            border: 5px solid #f1b579;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rodape-brincante span {
+            font-size: 2.4rem;
+            display: inline-block;
+            filter: drop-shadow(0 4px 2px #b45f2b);
+        }
+
+        /* responsividade para celular vira 2 colunas */
+        @media (max-width: 750px) {
+            .galeria-grade {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .cabecalho-galeria h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .galeria-grade {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
-    Eu não sei o que estou fazendo 
+
+    <div class="cabecalho-galeria">
+        <h1>🎨📚 50 ATIVIDADES DIVERTIDAS 📚🎨</h1>
+        <div class="subtitulo">
+            <span>⭐</span> clique nos cards <span>⭐</span>
+        </div>
+        <p style="font-size: 1.5rem; color:#4b371e; margin-top:0.5rem;">(passe o mouse para ver a mágica)</p>
+    </div>
+
+    <!-- grade 5x10 = 50 espaços para imagens infantis -->
+    <div class="galeria-grade">
+        <!-- Atividade 1 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/emoji/144/000000/paintbrush-emoji.png" alt="pintura" loading="lazy">
+            </div>
+            <div class="legenda">🎨 Pintura <span class="numero-bolinha">1</span></div>
+        </div>
+        <!-- Atividade 2 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/reading.png" alt="leitura" loading="lazy">
+            </div>
+            <div class="legenda">📖 Hora do conto <span class="numero-bolinha">2</span></div>
+        </div>
+        <!-- Atividade 3 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/play-doh.png" alt="massinha" loading="lazy">
+            </div>
+            <div class="legenda">🧪 Massinha <span class="numero-bolinha">3</span></div>
+        </div>
+        <!-- Atividade 4 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/children-playing-blocks.png" alt="blocos" loading="lazy">
+            </div>
+            <div class="legenda">🧱 Bloquinhos <span class="numero-bolinha">4</span></div>
+        </div>
+        <!-- Atividade 5 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/stack-of-books.png" alt="livros" loading="lazy">
+            </div>
+            <div class="legenda">📚 Biblioteca <span class="numero-bolinha">5</span></div>
+        </div>
+        <!-- Atividade 6 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/jigsaw.png" alt="quebra-cabeca" loading="lazy">
+            </div>
+            <div class="legenda">🧩 Quebra-cabeça <span class="numero-bolinha">6</span></div>
+        </div>
+        <!-- Atividade 7 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/musical-notes.png" alt="musica" loading="lazy">
+            </div>
+            <div class="legenda">🎵 Música <span class="numero-bolinha">7</span></div>
+        </div>
+        <!-- Atividade 8 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/ball.png" alt="bola" loading="lazy">
+            </div>
+            <div class="legenda">⚽ Brincar com bola <span class="numero-bolinha">8</span></div>
+        </div>
+        <!-- Atividade 9 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/toy-duck.png" alt="banheira" loading="lazy">
+            </div>
+            <div class="legenda">🦆 Banho de brinquedo <span class="numero-bolinha">9</span></div>
+        </div>
+        <!-- Atividade 10 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/sand-sculpture.png" alt="areia" loading="lazy">
+            </div>
+            <div class="legenda">🏖️ Areia / parque <span class="numero-bolinha">10</span></div>
+        </div>
+        <!-- Atividade 11 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/playground.png" alt="playground" loading="lazy">
+            </div>
+            <div class="legenda">🌳 Playground <span class="numero-bolinha">11</span></div>
+        </div>
+        <!-- Atividade 12 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/crayons.png" alt="giz de cera" loading="lazy">
+            </div>
+            <div class="legenda">🖍️ Desenho com giz <span class="numero-bolinha">12</span></div>
+        </div>
+        <!-- Atividade 13 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/origami.png" alt="dobradura" loading="lazy">
+            </div>
+            <div class="legenda">🦢 Dobradura <span class="numero-bolinha">13</span></div>
+        </div>
+        <!-- Atividade 14 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/paper-plane.png" alt="aviao de papel" loading="lazy">
+            </div>
+            <div class="legenda">✈️ Avião de papel <span class="numero-bolinha">14</span></div>
+        </div>
+        <!-- Atividade 15 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/kid-science.png" alt="ciencia" loading="lazy">
+            </div>
+            <div class="legenda">🔬 Experiências <span class="numero-bolinha">15</span></div>
+        </div>
+        <!-- Atividade 16 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/cooking-for-kids.png" alt="culinaria" loading="lazy">
+            </div>
+            <div class="legenda">🍪 Culinária kids <span class="numero-bolinha">16</span></div>
+        </div>
+        <!-- Atividade 17 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/treasure-chest.png" alt="tesouro" loading="lazy">
+            </div>
+            <div class="legenda">🗺️ Caça ao tesouro <span class="numero-bolinha">17</span></div>
+        </div>
+        <!-- Atividade 18 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/puzzle-heart.png" alt="puzzle" loading="lazy">
+            </div>
+            <div class="legenda">💖 Puzzle coração <span class="numero-bolinha">18</span></div>
+        </div>
+        <!-- Atividade 19 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/magic-show.png" alt="magica" loading="lazy">
+            </div>
+            <div class="legenda">🪄 Mágica <span class="numero-bolinha">19</span></div>
+        </div>
+        <!-- Atividade 20 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/puppet.png" alt="fantoche" loading="lazy">
+            </div>
+            <div class="legenda">🧦 Fantoches <span class="numero-bolinha">20</span></div>
+        </div>
+        <!-- Atividade 21 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/play-movie.png" alt="cineminha" loading="lazy">
+            </div>
+            <div class="legenda">🎬 Cinema em casa <span class="numero-bolinha">21</span></div>
+        </div>
+        <!-- Atividade 22 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/kids.png" alt="amigos" loading="lazy">
+            </div>
+            <div class="legenda">🧑‍🤝‍🧑 Brincadeira em grupo <span class="numero-bolinha">22</span></div>
+        </div>
+        <!-- Atividade 23 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/circus.png" alt="circo" loading="lazy">
+            </div>
+            <div class="legenda">🎪 Dia de circo <span class="numero-bolinha">23</span></div>
+        </div>
+        <!-- Atividade 24 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/kite.png" alt="pipa" loading="lazy">
+            </div>
+            <div class="legenda">🪁 Soltar pipa <span class="numero-bolinha">24</span></div>
+        </div>
+        <!-- Atividade 25 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/bike.png" alt="bicicleta" loading="lazy">
+            </div>
+            <div class="legenda">🚲 Andar de bike <span class="numero-bolinha">25</span></div>
+        </div>
+        <!-- Atividade 26 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/patins.png" alt="patins" loading="lazy">
+            </div>
+            <div class="legenda">🛼 Patins <span class="numero-bolinha">26</span></div>
+        </div>
+        <!-- Atividade 27 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/skateboard.png" alt="skate" loading="lazy">
+            </div>
+            <div class="legenda">🛹 Skate <span class="numero-bolinha">27</span></div>
+        </div>
+        <!-- Atividade 28 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/hula-hoop.png" alt="bambole" loading="lazy">
+            </div>
+            <div class="legenda">🔄 Bambolê <span class="numero-bolinha">28</span></div>
+        </div>
+        <!-- Atividade 29 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/jump-rope.png" alt="pular corda" loading="lazy">
+            </div>
+            <div class="legenda">🪢 Pular corda <span class="numero-bolinha">29</span></div>
+        </div>
+        <!-- Atividade 30 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/dance-floor.png" alt="danca" loading="lazy">
+            </div>
+            <div class="legenda">💃 Dança <span class="numero-bolinha">30</span></div>
+        </div>
+        <!-- Atividade 31 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/yoga.png" alt="yoga" loading="lazy">
+            </div>
+            <div class="legenda">🧘 Yoga infantil <span class="numero-bolinha">31</span></div>
+        </div>
+        <!-- Atividade 32 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/crab.png" alt="brincadeira de caranguejo" loading="lazy">
+            </div>
+            <div class="legenda">🦀 Imitar bichos <span class="numero-bolinha">32</span></div>
+        </div>
+        <!-- Atividade 33 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/microscope.png" alt="microscopio" loading="lazy">
+            </div>
+            <div class="legenda">🔬 Explorar natureza <span class="numero-bolinha">33</span></div>
+        </div>
+        <!-- Atividade 34 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/plant-under-sun.png" alt="plantar" loading="lazy">
+            </div>
+            <div class="legenda">🌱 Plantar feijão <span class="numero-bolinha">34</span></div>
+        </div>
+        <!-- Atividade 35 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/forest.png" alt="passeio floresta" loading="lazy">
+            </div>
+            <div class="legenda">🌳 Passeio ecológico <span class="numero-bolinha">35</span></div>
+        </div>
+        <!-- Atividade 36 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/camping.png" alt="acampar" loading="lazy">
+            </div>
+            <div class="legenda">🏕️ Acampar na sala <span class="numero-bolinha">36</span></div>
+        </div>
+        <!-- Atividade 37 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/tent.png" alt="cabana" loading="lazy">
+            </div>
+            <div class="legenda">⛺ Cabana de lençol <span class="numero-bolinha">37</span></div>
+        </div>
+        <!-- Atividade 38 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/storytelling.png" alt="contação história" loading="lazy">
+            </div>
+            <div class="legenda">📣 Contar histórias <span class="numero-bolinha">38</span></div>
+        </div>
+        <!-- Atividade 39 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/teddy-bear.png" alt="ursinho" loading="lazy">
+            </div>
+            <div class="legenda">🧸 Chá de pelúcia <span class="numero-bolinha">39</span></div>
+        </div>
+        <!-- Atividade 40 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/dinosaur.png" alt="dinossauro" loading="lazy">
+            </div>
+            <div class="legenda">🦖 Caça aos dinos <span class="numero-bolinha">40</span></div>
+        </div>
+        <!-- Atividade 41 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/robot-2.png" alt="robo" loading="lazy">
+            </div>
+            <div class="legenda">🤖 Montar robô <span class="numero-bolinha">41</span></div>
+        </div>
+        <!-- Atividade 42 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/board-games.png" alt="jogo tabuleiro" loading="lazy">
+            </div>
+            <div class="legenda">🎲 Jogo de tabuleiro <span class="numero-bolinha">42</span></div>
+        </div>
+        <!-- Atividade 43 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/card-game.png" alt="cartas" loading="lazy">
+            </div>
+            <div class="legenda">🃏 Jogo de cartas <span class="numero-bolinha">43</span></div>
+        </div>
+        <!-- Atividade 44 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/domino.png" alt="dominó" loading="lazy">
+            </div>
+            <div class="legenda">🀄 Dominó <span class="numero-bolinha">44</span></div>
+        </div>
+        <!-- Atividade 45 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/memory.png" alt="memoria" loading="lazy">
+            </div>
+            <div class="legenda">🧠 Jogo da memória <span class="numero-bolinha">45</span></div>
+        </div>
+        <!-- Atividade 46 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/bubbles.png" alt="bolhas" loading="lazy">
+            </div>
+            <div class="legenda">🫧 Bolhas de sabão <span class="numero-bolinha">46</span></div>
+        </div>
+        <!-- Atividade 47 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/telescope.png" alt="telescopio" loading="lazy">
+            </div>
+            <div class="legenda">🔭 Olhar estrelas <span class="numero-bolinha">47</span></div>
+        </div>
+        <!-- Atividade 48 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/cloud.png" alt="nuvem" loading="lazy">
+            </div>
+            <div class="legenda">☁️ Caçar nuvens <span class="numero-bolinha">48</span></div>
+        </div>
+        <!-- Atividade 49 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/ballet.png" alt="bailarina" loading="lazy">
+            </div>
+            <div class="legenda">🩰 Dança criativa <span class="numero-bolinha">49</span></div>
+        </div>
+        <!-- Atividade 50 -->
+        <div class="cartao-atividade">
+            <div class="moldura-img">
+                <img src="https://img.icons8.com/color/144/000000/party-balloons.png" alt="festa" loading="lazy">
+            </div>
+            <div class="legenda">🎈 Festa surpresa! <span class="numero-bolinha">50</span></div>
+        </div>
+        <!-- fim dos 50 cards -->
+    </div>
+
+    <div class="rodape-brincante">
+        <span>🧸✨ 50 atividades para sonhar e brincar ✨🧸</span>
+    </div>
+
+    <!-- explicação sutil dos links img (todos seguros e infantis) -->
+    <div style="text-align: center; margin-top: 2rem; font-size: 1.2rem; color: #7b5e3b; background: #eeddbb; padding: 0.5rem; border-radius: 30px; max-width: 600px; margin-left: auto; margin-right: auto; border: 2px solid #dba570;">
+        ⭐ cada imagem é um link (icones8) próprio para crianças — 50/50
+    </div>
 </body>
 </html>
